@@ -1,0 +1,199 @@
+- Class: meta
+  Course: R Programming
+  Lesson: 向量
+  Author: Nick Carchedi (翻译 陆海波)
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: R 中最简单和最常见的数据结构是向量.
+
+- Class: text
+  Output: '向量有两种不同的类型: 原子向量和列表. 一个原子向量内每个元素都具有相同的数据类型, 而一个列表可能包含多种数据类型. 在我们进入列表之前, 我们将先看一下原子向量.'
+
+- Class: text
+  Output: 在前面的课程中, 我们讨论了数值型向量, 这是一种原子向量. 其他类型的原子向量包括逻辑 (bool) 向量、字符 (char) 向量、整数 (int) 向量和复数 (complex)向量. 在本课中, 我们将更深入地了解逻辑和字符向.
+
+- Class: text
+  Output: 逻辑向量可以包含值 TRUE, FALSE 和 NA (表示 "not available", 不可用、不知道). 这些值是 "逻辑判断" 的结果. 让我们在一些简单的条件下进行实验.
+
+- Class: cmd_question
+  Output: 首先, 创建包含值 0.5、55、-10 和 6 的数值向量 num_vect.
+  CorrectAnswer: num_vect <- c(0.5, 55, -10, 6)
+  AnswerTests: omnitest(correctExpr='num_vect <- c(0.5, 55, -10, 6)')
+  Hint: 回想一下, c() 函数用于创建向量. 如果你忘了怎么用, 用 ?c 查看帮助文件. 不要忘记将结果赋给一个名为 num_vect 的新变量.
+
+- Class: cmd_question
+  Output: 现在, 创建一个名为 tf 的变量, 该变量获取 num_vect < 1 的结果
+  CorrectAnswer: tf <- num_vect < 1
+  AnswerTests: omnitest(correctExpr='tf <- num_vect < 1')
+  Hint: 使用 tf <- num_vect < 1 将 num_vect < 1 的结果赋给名为 tf 的变量.
+
+- Class: mult_question
+  Output: 你觉得 tf 会是什么样子?
+  CorrectAnswer: 4 个逻辑值的向量
+  AnswerChoices: 4 个逻辑值的向量; 一个逻辑值
+  AnswerTests: omnitest(correctVal='4 个逻辑值的向量')
+  Hint: 还记得我们的向量的数值运算么? R 中许多操作都是在一个元素一个元素的基础上执行的. 我们称之为 "向量化" 操作.
+
+- Class: cmd_question
+  Output: 现在打印 tf 的内容.
+  CorrectAnswer: tf
+  AnswerTests: omnitest(correctExpr='tf')
+  Hint: 只需键入 tf 并按 Enter 查看其值.
+
+- Class: text
+  Output: 语句 num_vect < 1 是一个条件判断, tf 告诉我们数值向量 num_vect 的每个对应元素是否满足这个条件.
+
+- Class: text
+  Output: num_vect 的第一个元素是 0.5, 它小于 1, 因此语句 0.5 < 1 为 TRUE. num_vect 的第二个元素是 55, 它大于 1, 因此语句 55 < 1 为 FALSE. 同样的逻辑也适用于第三和第四个元素.
+
+- Class: cmd_question
+  Output: 我们再试试. 键入 num_vect >= 6, 而不将结果赋给新变量.
+  CorrectAnswer: num_vect >= 6
+  AnswerTests: omnitest(correctExpr='num_vect >= 6')
+  Hint: 不要创建新变量, 我们只想看看 num_vect >= 6 的结果. 确保 `>` 和 `=` 之间没有空格. 把它们想象成一个代表 "大于或等于" 的符号.
+
+- Class: text
+  Output: 这一次, 我们要问 num_vect 的每个单独元素是否大于或等于 6. 因为只有 55 和 6 大于或等于 6, 结果的第二和第四个元素是 TRUE, 第一和第三个元素是 FALSE.
+
+- Class: text
+  Output: 这些示例中的符号`<` 和 `>=` 称为 "逻辑运算符". 其他逻辑运算符包括 `>`, `<=`, `==` 用于精确相等, 和 `!=` 表示不等.
+
+- Class: text
+  Output: 如果我们有两个逻辑表达式 A 和 B, 我们可以问 A | B (逻辑 "或") 是否至少有一个是 TRUE, 或者 A & B (逻辑 "且") 是否都是 TRUE. 最后 !A 是 A 的否定, 当 A 为 FALSE 时为 TRUE, 反之亦然.
+
+- Class: text
+  Output: 下面我们花一些时间学习这些逻辑运算符的各种组合.
+
+- Class: text
+  Output: 尽你最大的努力预测下面每一句话的结果.
+  
+- Class: mult_question
+  Output: (3 > 5) & (4 == 4)
+  CorrectAnswer: 'FALSE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='FALSE')
+  Hint: 把这个问题分成两部分. 只有当 `&` 两边的表达式都是 TRUE 时, 结果才是 TRUE.
+
+- Class: mult_question
+  Output: (TRUE == TRUE) | (TRUE == FALSE)
+  CorrectAnswer: 'TRUE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: 把这个问题分成两部分. 只要 `|` 两边的表达式中有一个是 TRUE, 则结果就是 TRUE.
+
+- Class: mult_question
+  Output: ((111 >= 111) | !(TRUE)) & ((4 + 1) == 5)
+  CorrectAnswer: 'TRUE'
+  AnswerChoices: TRUE; FALSE
+  AnswerTests: omnitest(correctVal='TRUE')
+  Hint: 这是个比较复杂的问题. 记住 `!` 符号否定其后的表达式. 这里还应注意 "操作顺序". 应首先计算括在括号内的条件, 然后往外走.
+
+- Class: text
+  Output: 如果你觉得这些很棘手, 别担心. 在 R 中使用逻辑语句需要多加练习.
+
+- Class: text
+  Output: 字符向量在 R 中也很常见. 双引号用于区分字符对象, 如下例所示.
+
+- Class: cmd_question
+  Output: '创建包含以下单词的字符向量: "My", "name", "is". 记住把每个单词都用双引号括起来 (如果都是用单引号也是可以的), 这样 R 就知道它们是字符串. 将向量存储在一个名为 my_char 的变量中'
+  CorrectAnswer: my_char <- c("My", "name", "is")
+  AnswerTests: omnitest(correctExpr='my_char <- c("My", "name", "is")')
+  Hint: 键入 my_char <- c("My", "name", "is") 创建名为 my_char 的新变量, 该变量包含长度为 3 的字符向量. 确保分隔单词的逗号在双引号之外, 否则 R 认为逗号是单词的一部分.
+
+- Class: cmd_question
+  Output: 打印 my_char 的内容.
+  CorrectAnswer: my_char
+  AnswerTests: omnitest(correctExpr='my_char')
+  Hint: 键入 my_char 查看其内容.
+
+- Class: text
+  Output: 现在, my_char 是长度为 3 的字符向量. 假设我们想将 my_char 的元素连接成一个连续的字符串 (即长度为 1 的字符向量). 我们可以使用 stringr 包中的 str_c() 函数来实现这一点.
+
+- Class: text
+  Output: stringr 是一个包含了常见字符串操作函数的包, 它是 tidyverse 系列中的一个. 为了使用 stringr, 我们首先要安装 tidyverse.
+  
+- Class: cmd_question
+  Output: 我们可以通过在控制台输入 install.packages("tidyverse") 进修安装. (包只需要安装一次即可)
+  CorrectAnswer: install.packages("tidyverse")
+  AnswerTests: omnitest(correctExpr='install.packages("tidyverse")')
+  Hint: 键入 install.packages("tidyverse") 安装 tidyverse. 注意不要少了引号.
+  
+- Class: text
+  Output: 如果网络畅通, 那应该可以看到提示信息里说 tidyverse 已经安装好了. 接下来我们需要加载 tidyverse. (安装完成的包在每次重新打开 R 之后都需要再次加载才能使用)
+  
+  
+- Class: cmd_question
+  Output: 我们可以通过在控制台输入 library("tidyverse") 进修加载. (注意, 这里的引号可以省略.)
+  CorrectAnswer: library("tidyverse")
+  AnswerTests: omnitest(correctExpr='library("tidyverse")')
+  Hint: 键入 library("tidyverse") 加载 tidyverse. 这里引号可要可不要.
+
+- Class: text
+  Output: 可以看到 tidyverse 被成功加载, 其中 stringr 也一并被加载了. 这样我们就可以使用 stringr 中的函数 str_c() 了.
+
+- Class: cmd_question
+  Output: 键入 str_c(my_char, collapse = " "). 确保 'collapse' 参数中的双引号之间有空格. 你马上就会明白原因了.
+  CorrectAnswer: str_c(my_char, collapse = " ")
+  AnswerTests: omnitest(correctExpr='str_c(my_char, collapse = " ")')
+  Hint: 使用 str_c(my_char, collapse = " ") 来合并向量中的元素, 使它们成为一个字符串. "collapse" 参数中的双引号之间应该有一个空格, 这样就可以用一个空格分隔单词.
+
+- Class: text
+  Output: str_c() 函数的 'collapse' 参数告诉 R 把 my_char 字符向量的元素合并在一起, 且用一个空格将其分割开.
+
+- Class: text
+  Output: 好像我们遗漏了什么...啊, 是的! 你的名字!
+
+- Class: cmd_question
+  Output: '若要将你的名字添加 (或 "连接") 到 my_char 的末尾, 请使用如下 c() 函数: c(my_char, "your_name_here"). 把你的名字用双引号引起来. 现在试试, 将结果存储在一个名为 my_name 的新变量中'
+  CorrectAnswer: my_name <- c(my_char, "Swirl")
+  AnswerTests: var_is_a("character", "my_name"); expr_uses_func("c"); expr_creates_var("my_name");
+    val_has_length(4)
+  Hint: 使用 c() 函数将你的名字添加到 my_char 向量的末尾. 请确保将结果分配给名为 my_name 的新变量. 如果你的名字是 "Swirl", 你可以输入 my_name <- c(my_char, "Swirl").
+
+- Class: cmd_question
+  Output: 看一下 my_name 的内容.
+  CorrectAnswer: my_name
+  AnswerTests: omnitest(correctExpr='my_name')
+  Hint: 键入 my_name 并按 Enter 查看其内容.
+
+- Class: cmd_question
+  Output: 现在, 再次使用 str_c() 函数将 my_name 中的单词连接成一个字符串. 别忘了添加参数 collapse = " ".
+  CorrectAnswer: str_c(my_name, collapse = " ")
+  AnswerTests: omnitest(correctExpr='paste(my_name, collapse = " ")')
+  Hint: 使用 str_c(my_name, collapse = " ") 将所有四个单词连接在一起, 用单个空格分隔.
+
+- Class: text
+  Output: 在本例中, 我们使用了 str_c() 函数来合并单个字符向量中的元素. str_c() 还可用于连接多个字符向量的元素.
+
+- Class: cmd_question
+  Output: 在最简单的情况下, 我们可以连接长度为 1 的两个字符向量 (即连接两个单词). 试一下 str_c("Hello", "world!", sep = " "), 其中 'sep' 参数告诉 R 我们要用一个空格将连接起来的元素进修分割.
+  CorrectAnswer: str_c("Hello", "world!", sep = " ")
+  AnswerTests: omnitest(correctExpr='str_c("Hello", "world!", sep = " ")')
+  Hint: 键入 str_c("Hello", "world!", sep = " ") 将 "Hello" 和 "world" 两个单词连在一起, 并用一个空格隔开. str_c() 函数的 'sep' 参数中的双引号之间应该有一个空格.
+
+- Class: cmd_question
+  Output: 对于稍微复杂一点的例子, 我们可以连接两个向量, 每个向量的长度为 3. 使用 str_c() 将整数向量 1:3 与字符向量 c("X", "Y", "Z") 连接起来. 这次使用 sep = "" 在连接的元素之间不留任何空间.
+  CorrectAnswer: str_c(1:3, c("X", "Y", "Z"), sep = "")
+  AnswerTests: any_of_exprs('str_c(1:3, c("X", "Y", "Z"), sep = "")', 'str_c(c(1:3), c("X", "Y", "Z"), sep = "")')
+  Hint: 键入 str_c(1:3, c("X", "Y", "Z"), sep = "") 看看当我们使用 str_c() 连接两个长度相等的向量时会发生什么.
+
+- Class: text
+  Output: '如果两个向量的长度不同, 你认为会发生什么?'
+
+- Class: cmd_question
+  Output: 向量循环! 尝试 str_c(LETTERS, 1:4, sep = "-"), 其中 LETTERS 是 R 中的一个预定义变量, 包含英语字母表中所有26个大写字母的字符向量.
+  CorrectAnswer: str_c(LETTERS, 1:4, sep = "-")
+  AnswerTests: omnitest(correctExpr='str_c(LETTERS, 1:4, sep = "-")')
+  Hint: 键入 str_c(LETTERS, 1:4, sep = "-") 查看 R 如何循环向量 1:4 以匹配字母的长度. 注意, 我们这次使用 "-" 作为分隔符, 而不是单个空格.
+
+- Class: text
+  Output: 由于字母向量 LETTERS 比数字向量 1:4 长, R 只需循环或重复 1:4, 直到与字母长度匹配为止.
+
+- Class: text
+  Output: 另外值得注意的是, 数值向量 1:4 被 str_c() 函数 "强制转换" 为字符向量.
+
+- Class: text
+  Output: 我们将在另一节课中讨论强制转换, 但它真正的意思是上面输出的数字 1、2、3 和 4 不再是 R 中的数字, 而是字符 "1"、"2"、"3" 和 "4".

@@ -1,0 +1,175 @@
+- Class: meta
+  Course: R Programming
+  Lesson: 矩阵和数据框
+  Author: 陆海波
+  Type: Standard
+  Organization: SIT
+  Version: 2.2.0
+
+- Class: text
+  Output: 在本课中, 我们将介绍矩阵和数据框. 两者都表示 "矩形" 数据类型, 这意味着它们用于存储带有行和列的表格数据.
+
+- Class: text
+  Output: 正如你将看到的, 两者的主要区别在于矩阵只能包含一种数据类, 而数据框可以包含许多不同的数据类. 
+
+- Class: cmd_question
+  Output: 让我们使用 `:` 运算符创建一个包含数字 1 到 20 的向量. 将结果存储在名为 my_vector 的变量中.
+  CorrectAnswer: my_vector <- 1:20
+  AnswerTests: omnitest(correctExpr='my_vector <- 1:20')
+  Hint: 在关于序列的课程中, 你学习了 `:` 运算符. 如果要创建包含数字 1、2 和 3 的向量 (按顺序), 可以使用 c(1, 2, 3) 或 1:3. 在本例中, 我们希望将数字 1 到 20 存储在名为 my_vector 的变量中. 另外, 记住在使用 `:` 时不需要 c() 函数.
+
+- Class: cmd_question
+  Output: 查看刚刚创建的向量的内容.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: 键入 my_vector 以查看其内容.
+
+- Class: cmd_question
+  Output: 'dim() 函数的作用是: 告诉我们一个对象的 "维数". dim(my_vector) 的结果会是什么? 试试看.'
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: 只需键入 dim(my_vector) 即可查看结果.
+
+- Class: cmd_question
+  Output: 返回结果为空 (NULL)! 这是因为 my_vector 是一个向量，, 以它没有 "dim" 属性 (所以它是空的). 但是我们可以使用 length() 函数得到它的长度. 现在试试.
+  CorrectAnswer: length(my_vector)
+  AnswerTests: omnitest(correctExpr='length(my_vector)')
+  Hint: 键入 length(my_vector) 看看刚刚创建的向量的长度.
+
+- Class: cmd_question
+  Output: 果然, 这就是我们想要的. 但是, 如果我们给 my_vector 一个 "dim" 属性会怎么样? 我们试试吧. 键入 dim(my_vector) <- c(4,5).
+  CorrectAnswer: dim(my_vector) <- c(4, 5)
+  AnswerTests: omnitest(correctExpr='dim(my_vector) <- c(4, 5)')
+  Hint: 键入 dim(my_vector) <- c(4, 5) 给 my_vector 添加一个 "dim" 属性.
+
+- Class: text
+  Output: 'dim() 函数的作用是: 获取或设置 R 对象的 "dim" 属性. 在本例中, 我们将值 c(4, 5) 赋给 my_vector 的 "dim" 属性.'
+
+- Class: cmd_question
+  Output: 使用 dim(my_vector) 确认我们是否正确设置了 "dim" 属性.
+  CorrectAnswer: dim(my_vector)
+  AnswerTests: omnitest(correctExpr='dim(my_vector)')
+  Hint: 只需键入 dim(my_vector) 来查看已设置的 "dim" 属性.
+
+- Class: cmd_question
+  Output: 另一种方法是在 my_vector 上调用 attributes() 函数. 现在就试试.
+  CorrectAnswer: attributes(my_vector)
+  AnswerTests: omnitest(correctExpr='attributes(my_vector)')
+  Hint: 命令 attributes(my_vector) 将显示 my_vector 对象的所有属性.
+
+- Class: text
+  Output: 就像在数学课里说的, 处理二维对象 (如矩阵) 时, 第一个数字是行, 第二个是列. 因此, 我们将 my_vector 设置成了 4 行 5 列.
+
+- Class: cmd_question
+  Output: 但是, 等等! 这听起来 my_vector 不再像是向量了. 嗯, 不是, 现在它是一个矩阵了. 现在查看 my_vector 的值, 看看它的样子.
+  CorrectAnswer: my_vector
+  AnswerTests: omnitest(correctExpr='my_vector')
+  Hint: 键入 my_vector 以查看其内容.
+
+- Class: cmd_question
+  Output: 现在, 让我们使用 class() 函数来确认它实际上是一个矩阵 (Matrix). 键入 class(my_vector).
+  CorrectAnswer: class(my_vector)
+  AnswerTests: omnitest(correctExpr='class(my_vector)')
+  Hint: 键入 class(my_vector) 以查看 my_vector 的类型.
+
+- Class: cmd_question
+  Output: my_vector 现在是矩阵. 我们应该把它存储在一个新的变量中, 以便我们记住它是什么. 将 my_vector 的值存储在名为 my_matrix 的新变量中.
+  CorrectAnswer: my_matrix <- my_vector
+  AnswerTests: omnitest(correctExpr='my_matrix <- my_vector')
+  Hint: 因为我们不能仅仅更改变量 my_vector 的名字, 我们将使用 my_matrix <- my_vector 将其值赋给一个新变量.
+
+- Class: text
+  Output: 到目前为止, 我们使用的例子旨在说明矩阵只是一个具有维度 (dim) 属性的原子向量. 一个创建矩阵的更直接的方法是使用 matrix() 函数.
+
+- Class: cmd_question
+  Output: 现在使用 `?` 调出 matrix() 函数的帮助文件.
+  CorrectAnswer: ?matrix
+  AnswerTests: omnitest(correctExpr='?matrix')
+  Hint: 键入 ?matrix 就可以了.
+
+- Class: cmd_question
+  Output: 现在, 查看 matrix() 函数的文档, 看看如何通过调用 matrix() 函数创建包含数字 1-20 且维度是 4 行 5 列的矩阵. 将结果存储在名为 my_matrix2 的变量中.
+  CorrectAnswer: my_matrix2 <- matrix(1:20, nrow=4, ncol=5)
+  AnswerTests: calculates_same_value('matrix(1:20, nrow=4, ncol=5)'); expr_creates_var('my_matrix2')
+  Hint: '使用三个参数调用 matrix() 函数: 1:20, 行数和列数. 请确保按正确名字指定参数, 并将结果存储在 my_matrix2 (而不是 my_matrix) 中.'
+
+- Class: cmd_question
+  Output: 最后, 让我们确认 my_matrix 和 my_matrix2 实际上是相同的. 使用 identical() 函数可以做到. 试试看.
+  CorrectAnswer: identical(my_matrix, my_matrix2)
+  AnswerTests: any_of_exprs('identical(my_matrix, my_matrix2)', 'identical(my_matrix2, my_matrix)')
+  Hint: 如果你不确定该如何使用 identical(), 那么使用 `?` 功能.
+
+- Class: text
+  Output: 现在, 假设我们表格中的数字代表临床实验中的一些测量值, 其中每一行代表一个患者, 每一列代表一个对其测量得到的变量.
+
+- Class: text
+  Output: 我们可能需要标记行, 以便知道哪些数字属于实验中的对应患者. 另一种较好的方法是向矩阵中添加一列, 其中包含所有四个人的姓名.
+
+- Class: cmd_question
+  Output: 让我们先创建一个包含患者姓名的字符向量 —— Bill、Gina、Kelly 和 Sean. 记住, 双引号告诉 R 某物是字符串. 将结果存储在名为 patients 的变量中.
+  CorrectAnswer: patients <- c("Bill", "Gina", "Kelly", "Sean")
+  AnswerTests: omnitest(correctExpr='patients <- c("Bill", "Gina", "Kelly", "Sean")')
+  Hint: 确保每个名字的第一个字母大写, 并将结果存储在名为 patients 的变量中. 还有, 别把病人的顺序搞混了!
+
+- Class: cmd_question
+  Output: 现在我们将使用 cbind() 函数 (column bind) 来 "组合列". 不用将结果存储到新变量中. 只需用两个参数调用 cbind() —— patients 向量和 my_matrix.
+  CorrectAnswer: cbind(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='cbind(patients, my_matrix)')
+  Hint: 键入 cbind(patients, my_matrix) 将患者姓名添加到数字矩阵中.
+
+- Class: text
+  Output: 结果好像有些奇怪! 似乎把字符向量和我们的数字矩阵结合起来会导致所有内容都用双引号括起来. 这意味着我们只剩下一个字符串矩阵, 这不是我们想要的结果.
+
+- Class: text
+  Output: 如果你还记得本课的开头, 我告诉过你矩阵只能包含一类数据. 因此, 当我们试图将字符向量与数字矩阵组合时, R 被迫将数字 "强制转换" 为字符, 因此是双引号.
+
+- Class: text
+  Output: 这称为 "隐性强制转换", 因为我们没有要求这么做, 但就这样发生了. 但是为什么 R 不把病人的名字转换成数字呢? 我让你自己考虑这个问题.
+
+- Class: cmd_question
+  Output: '所以, 我们还剩下一个问题, 就是如何在不破坏数值数据完整性的情况下, 将患者的姓名包括在表格中. 尝试以下方法 : my_data <- data.frame(patients, my_matrix).'
+  CorrectAnswer: my_data <- data.frame(patients, my_matrix)
+  AnswerTests: omnitest(correctExpr='my_data <- data.frame(patients, my_matrix)')
+  Hint: 键入 my_data <- data.frame(patients, my_matrix), 我们看看有什么结果.
+
+- Class: cmd_question
+  Output: 现在查看 my_data 的内容, 看看我们得到了什么.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: 键入 my_data 以查看其内容.
+
+- Class: text
+  Output: 看起来 data.frame() 函数允许我们将名字的字符向量存储在数字矩阵旁边. 这正是我们所希望的!
+
+- Class: text
+  Output: 事实上, data.frame() 函数接受任意数量的参数, 并返回由原始对象组成的 "data.frame" 类的单个对象.
+
+- Class: cmd_question
+  Output: 让我们通过在新创建的对象上调用 class() 函数来确认这一点.
+  CorrectAnswer: class(my_data)
+  AnswerTests: omnitest(correctExpr='class(my_data)')
+  Hint: class() 函数接受一个参数 —— 要确定类的对象.
+
+
+- Class: cmd_question
+  Output: 由于我们有六列 (包括患者姓名), 我们想为每列创建一个名字. 创建一个名为 cnames 的字符向量, 其中包含以下值 (按顺序) -- "patient", "age", "weight", "bp", "rating", "test".
+  CorrectAnswer: cnames <- c("patient", "age", "weight", "bp", "rating", "test")
+  AnswerTests: omnitest(correctExpr='cnames <- c("patient", "age", "weight", "bp", "rating", "test")')
+  Hint: 确保所有的名字都是小写的, 用双引号括起来, 用逗号隔开. 别忘了使用 c() 函数.
+
+- Class: cmd_question
+  Output: 现在, 使用 colnames() 函数为数据框 (data.frame) 设置 "colnames" 属性. 这与本课前面使用 dim() 函数的方式类似.
+  CorrectAnswer: colnames(my_data) <- cnames
+  AnswerTests: omnitest(correctExpr='colnames(my_data) <- cnames')
+  Hint: 试一下 colnames(my_data) <- cnames.
+
+- Class: cmd_question
+  Output: 让我们看看你是否做对了. 打印 my_data 内容.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: 将 my_data 的内容打印到控制台.
+
+- Class: text
+  Output: 在本课程中, 你学习了使用两种非常重要且常见的数据结构 (矩阵和数据框) 的基本知识. 还有很多东西需要学习, 我们将在未来的课程中涵盖更高级的内容, 特别是关于数据框的.
+
+

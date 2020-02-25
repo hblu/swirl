@@ -1,0 +1,183 @@
+- Class: meta
+  Course: R Programming
+  Lesson: 基础语法
+  Author: Nick Carchedi (翻译 陆海波)
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: 在本次练习中，我们将学习 R 编程语言的一些基础语法. 
+
+
+- Class: cmd_question
+  Output: 最简单的, R 可以作为计算器使用. 输入 5 + 7 并按Enter键
+  CorrectAnswer: 5 + 7
+  AnswerTests: omnitest(correctExpr='5 + 7')
+  Hint: 输入 5 + 7 后按Enter键.
+
+- Class: text
+  Output: R 会输出结果 12. 然而, R 是一种编程语言, 通常我们使用编程语言而不是计算器的原因是我们想自动化一些过程或避免不必要的重复.
+
+- Class: text
+  Output: 在这种情况下, 我们可能希望在之后的计算中使用上述结果. 因此我们可以创建一个新变量来存储结果, 而不是每次需要时都重新输入 5 + 7.
+
+- Class: text
+  Output: 在 R 中为变量赋值的方式是使用赋值运算符 '<-', 它是一个 '<' 符号, 后跟一个 '-'. 默认快捷键是 'alt + -'.
+
+- Class: text
+  Output: 把赋值运算符看作箭头, 将箭头右侧的值指定给箭头左侧的变量名.
+
+- Class: cmd_question
+  Output: 若要将 5 + 7 的结果赋给名为 x 的新变量, 请输入 x <- 5 + 7. 这可以理解为 "x 的值为 5 + 7". 现在试试看.
+  CorrectAnswer: x <- 5 + 7
+  AnswerTests: any_of_exprs('x <- 5 + 7', 'x <- 7 + 5')
+  Hint: 输入 x <- 5 + 7. 在赋值运算符的每一侧包含一个空格很重要(为了看得更清楚), 但不要在构成箭头的 `<` 和 `-` 之间放置空格.
+
+- Class: text
+  Output: 你会注意到这次 R 没有打印结果 12. 当你使用赋值运算符, R 假设您不希望立即看到结果, 而是希望稍后将结果用于其他用途.
+
+- Class: cmd_question
+  Output: 要查看变量 x 的值, 只需键入 x 并按 Enter 键. 现在试试.
+  CorrectAnswer: x
+  AnswerTests: omnitest(correctExpr='x')
+  Hint: 键入 x 并按回车键. 这将自动打印 x 的值.
+  
+- Class: cmd_question
+  Output: 现在, 将 x - 3 的结果存储在一个名为 y 的新变量中.
+  CorrectAnswer: y <- x - 3
+  AnswerTests: omnitest(correctExpr='y <- x - 3')
+  Hint: 键入 y <- x - 3 并按回车键. 不管你用的是 x-3 还是 x - 3 都是个人偏好, 但是在赋值运算符的两边加一个空格是个好习惯.
+
+- Class: cmd_question
+  Output: y 的值是多少? 键入 y 看一下.
+  CorrectAnswer: 'y'
+  AnswerTests: omnitest(correctExpr='y')
+  Hint: 键入 y 并按回车键.
+
+- Class: text
+  Output: 现在, 让我们创建一个称为向量的数字集合. 任何包含数据的对象都称为数据结构, 数字向量是 R 中最简单的数据结构类型. 事实上, 即使是单个数字也被视为长度为 1 的向量.
+
+- Class: cmd_question
+  Output: 创建向量的最简单方法是使用函数 c(), 它代表 "concatenate" 或 "combine". 若要创建包含数字 1.1 、9 和 3.14 的向量, 请键入 c(1.1, 9, 3.14). 现在试试, 并将结果存储在一个名为 z 的变量中.
+  CorrectAnswer: z <- c(1.1, 9, 3.14)
+  AnswerTests: omnitest(correctExpr='z <- c(1.1, 9, 3.14)')
+  Hint: 输入 z <- c(1.1, 9, 3.14), 这样向量 (1.1, 9, 3.14) 会赋给新变量 z. 向量中每个逗号后的空格不是必须的, 但这能使得你的代码更容易阅读.
+
+- Class: cmd_question
+  Output: 每当你对某个特定函数有疑问时, 都可以通过 `?` 命令. 例如, 如果需要有关 c() 函数的更多信息, 请键入 ?c. 注意这里函数 c 后不需要加括号. 试试看.
+  CorrectAnswer: ?c
+  AnswerTests: omnitest(correctExpr='?c')
+  Hint: 输入 ?c 并按回车键. 这将打开 c() 函数的帮助文件.
+
+- Class: cmd_question
+  Output: 键入 z 可查看其值. 注意, 输出中是没有逗号的.
+  CorrectAnswer: z
+  AnswerTests: omnitest(correctExpr='z')
+  Hint: z 并按 Enter 查看其值.
+
+- Class: cmd_question
+  Output: 可以将多个向量进行组合来生成新向量. 创建一个包含 z, 555, z 的新向量. 不要把这个向量赋给一个新变量, 这样我们就可以立即看到结果.
+  CorrectAnswer: c(z, 555, z)
+  AnswerTests: omnitest(correctExpr='c(z, 555, z)')
+  Hint: 输入 c(z, 555, z). 不要创建新变量, 我们只想看看结果.
+
+- Class: cmd_question
+  Output: '数字向量可以用在算术表达式中. 键入以下命令查看结果: z * 2 + 100.'
+  CorrectAnswer: z * 2 + 100
+  AnswerTests: omnitest(correctExpr='z * 2 + 100')
+  Hint: 输入 z * 2 + 100, 不将结果赋给变量. "*" 表示乘法.
+
+- Class: text
+  Output: 首先, R 将 z 中的三个元素分别乘以 2. 然后再将每个元素加 100, 这样就得到了上面的结果.
+
+- Class: text
+  Output: 其他常见的算术运算符有 `+`、`-`、`/` 和 `^` (其中 x^2 表示 "x平方"). sqrt()函数表示求平方根; abs()函数表示求绝对值.
+
+- Class: cmd_question
+  Output: 取 z - 1 的平方根, 并将其赋给一个名为 my_sqrt 的新变量。
+  CorrectAnswer: my_sqrt <- sqrt(z - 1)
+  AnswerTests: omnitest(correctExpr='my_sqrt <- sqrt(z - 1)')
+  Hint: 将 sqrt(z - 1) 的结果赋给一个名为 my_sqrt 的变量.
+
+- Class: mult_question
+  Output: 在查看 my_sqrt 变量的内容之前, 你认为它是什么?
+  CorrectAnswer: 长度为 3 的向量
+  AnswerChoices: 长度为 3 的向量; 单个数字 (即长度为 1 的向量); 长度为 0 的向量 (即空向量)
+  AnswerTests: omnitest(correctVal='长度为 3 的向量')
+  Hint: '想想 R 是如何处理其他 "向量化" 操作：逐个元素.'
+
+- Class: cmd_question
+  Output: 打印 my_sqrt 的内容.
+  CorrectAnswer: my_sqrt
+  AnswerTests: omnitest(correctExpr='my_sqrt')
+  Hint: 只需键入 my_sqrt 并按回车键即可查看其值.
+
+- Class: text
+  Output: 正如你可能已经猜到的, R 首先从 z 的每个元素中减去 1, 然后取每个元素的平方根. 这会得到一个与原始向量 z 长度相同的向量.
+
+- Class: cmd_question
+  Output: 现在, 创建一个名为 my_div 的新变量, 它将 z 的值除以 my_sqrt.
+  CorrectAnswer: my_div <- z / my_sqrt
+  AnswerTests: omnitest(correctExpr='my_div <- z / my_sqrt')
+  Hint: 输入 my_div <- z / my_sqrt. "/" 符号两边的空格不是必需的, 但通常可以通过使代码看起来不那么杂乱来提高可读性. 最后, 这是个人喜好.
+
+- Class: mult_question
+  Output: 你认为哪种说法是正确的?
+  CorrectAnswer: my_div 的第一个元素等于 z 的第一个元素除以 my_sqrt 的第一个元素, 依此类推...
+  AnswerChoices: my_div 的第一个元素等于 z 的第一个元素除以 my_sqrt 的第一个元素, 依此类推...; my_div是单个数字 (即长度为 1 的向量); my_div 未定义
+  AnswerTests: omnitest(correctVal='my_div 的第一个元素等于 z 的第一个元素除以 my_sqrt 的第一个元素, 依此类推...')
+  Hint: 想想 R 是如何处理其他 "向量化" 操作的, 比如 "+" 和 "*".
+
+- Class: cmd_question
+  Output: 输出 my_div 的值.
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: 键入 my_div 并按 Enter 查看其内容.
+
+- Class: text
+  Output: 当给定两个长度相同的向量时, R 只需逐个对每个元素执行指定的算术运算 (`+`、`-`、`*`, 等). 如果向量的长度不同, R "循环使用" 较短的向量, 直到其长度与较长的向量相同.
+
+- Class: text
+  Output: 当我们在前面的例子中做 z * 2 + 100 时, z 是长度为 3 的向量, 但从技术上讲, 2 和 100 是长度为 1 的向量.
+
+- Class: text
+  Output: '在幕后, R 是 "循环" 2 来产生 2 的向量, "循环" 100 来产生 100 的向量. 换句话说, 当你要求 R 计算 z * 2 + 100 时, 它真正计算的是: z * c(2, 2, 2) + c(100, 100, 100).'
+
+- Class: cmd_question
+  Output: 我们来看这个向量 "循环" 的另一个示例. 请尝试添对 c(1, 2, 3, 4) 和 c(0, 10) 求和. 不要将结果保存到新变量中.
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10)')
+  Hint: 在控制台中输入 c(1, 2, 3, 4) + c(0, 10), 查看 R 如何对两个不同长度的向量求和. 不要将结果赋给变量.
+
+- Class: text
+  Output: 如果较短向量的长度不能整除较长向量的长度, R 仍将应用 "循环" 方法, 但会抛出警告, 让你知道可能发生了可疑的事情.
+
+- Class: cmd_question
+  Output: 以 c(1, 2, 3, 4) + c(0, 10, 100) 为例.
+  CorrectAnswer: c(1, 2, 3, 4) + c(0, 10, 100)
+  AnswerTests: omnitest(correctExpr='c(1, 2, 3, 4) + c(0, 10, 100)')
+  Hint: 输入 c(1, 2, 3, 4) + c(0, 10, 100), 看看 R 如何处理这两个向量的求和.
+  
+- Class: text
+  Output: 在结束这次练习之前, 我想给你展示一些省时的小技巧.
+
+- Class: text
+  Output: 在本课的前面, 你计算了 z * 2 + 100. 假设你犯了一个小错误, 你打算加 1000 而不是 100. 你可以重新键入表达式, 或者...
+
+- Class: cmd_question
+  Output: 在许多编程环境中, 向上箭头将循环显示之前的命令. 尝试按键盘上的向上箭头, 直到到达此命令 (z * 2 + 100), 然后将 100 更改为 1000 并按回车键. 如果你觉得不停按向上箭头太麻烦, 只需键入正确的命令.
+  CorrectAnswer: z * 2 + 1000
+  AnswerTests: omnitest(correctExpr='z * 2 + 1000')
+  Hint: 如果你的键盘没有向上箭头, 请键入正确的命令继续.
+
+- Class: text
+  Output: 最后, 假设你想查看前面创建的变量的内容, 但是你似乎记不起它是 my_div 还是 myDiv. 你可以两个都试一下看看哪个管用, 或者...
+
+- Class: cmd_question
+  Output: 你可以键入变量名的前两个字母, 然后按 Tab 键 (可能不止一次). 大多数编程环境将提供以 "my" 开头的变量列表. 这称为 "自动补全", 当你的工作区中有许多变量时非常方便. 试试看. (如果自动补全对你不起作用, 只需键入 my_div 并按回车键.)
+  CorrectAnswer: my_div
+  AnswerTests: omnitest(correctExpr='my_div')
+  Hint: 如果你的编程环境不支持自动补全, 只需键入 my_div 并按 Enter 继续.
+
+

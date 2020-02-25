@@ -1,0 +1,105 @@
+- Class: meta
+  Course: R Programming
+  Lesson: 缺失值
+  Author: Nick Carchedi 翻译 陆海波
+  Type: Standard
+  Organization: JHU Biostat
+  Version: 2.2.0
+
+- Class: text
+  Output: 缺失值 (Missing Values) 在统计和数据分析中起着重要作用. 通常, 不能忽略缺失的值, 而是应该仔细研究它们, 看看是否有潜在的模式或原因导致它们缺失.
+
+- Class: text
+  Output: 在 R 中, NA 用于表示 "不可用" (not available) 或 "缺失" (missing) 的任何值 (在统计意义上). 在本课中, 我们将进一步探讨缺失值.
+
+- Class: cmd_question
+  Output: 任何涉及 NA 的操作通常都会产生 NA. 为了演示, 让我们创建一个向量 c(44, NA, 5, NA) 并将它赋给一个变量 x.
+  CorrectAnswer: x <- c(44, NA, 5, NA)
+  AnswerTests: omnitest(correctExpr='x <- c(44, NA, 5, NA)')
+  Hint: 将向量 c(44, NA, 5, NA) 赋给变量 x. NA 必须大写.
+
+- Class: cmd_question
+  Output: 现在, 让我们把 x 乘以 3.
+  CorrectAnswer: x * 3
+  AnswerTests: any_of_exprs('x * 3', '3 * x')
+  Hint: 试试 x * 3.
+
+- Class: text
+  Output: 注意, 与 x 中的 NA 值相对应的结果向量的元素也是 NA.
+
+- Class: cmd_question
+  Output: 为了使事情更有趣, 让我们创建一个向量 y <- rnorm(1000), 它包含了从标准正态分布中抽取的 1000个样本点.
+  CorrectAnswer: y <- rnorm(1000)
+  AnswerTests: omnitest(correctExpr='y <- rnorm(1000)')
+  Hint: 函数 rnorm() 从正态分布生成随机数. 输入 y <- rnorm(1000).
+
+- Class: cmd_question
+  Output: 接下来, 我们创建一个包含 1000 个 NA 的向量, z <- rep(NA, 1000).
+  CorrectAnswer: z <- rep(NA, 1000)
+  AnswerTests: omnitest(correctExpr='z <- rep(NA, 1000)')
+  Hint: 键入 z <- rep(NA, 1000) 生成包含 1000 个 NA 的向量.
+
+- Class: cmd_question
+  Output: 最后, 让我们从这 2000 个值中随机选择 100 个元素 (连接 y 和 z). 这样我们就不知道最终会有多少个 NA, 或者它们在最终向量中占据什么位置 my_data <- sample(c(y, z), 100).
+  CorrectAnswer: my_data <- sample(c(y, z), 100)
+  AnswerTests: omnitest(correctExpr='my_data <- sample(c(y, z), 100)')
+  Hint: 'sample() 函数的作用是: 从作为第一个参数 (在本例中为 c(y, z)) 提供的数据中抽取第二个参数 (100) 指定大小的随机样本. 命令 my_data <- sample(c(y, z), 100) 将给出我们想要的结果.'
+
+- Class: cmd_question
+  Output: '让我们首先问一个问题: 我们的 NA 在数据中的位置. is.na() 函数的作用是: 告诉我们向量的每个元素是否为 NA. 对 my_data 调用 is.na(), 并将结果保存到变量 my_na.'
+  CorrectAnswer: my_na <- is.na(my_data)
+  AnswerTests: omnitest(correctExpr='my_na <- is.na(my_data)')
+  Hint: 将 is.na(my_data) 的结果赋给变量 my_na.
+
+- Class: cmd_question
+  Output: 现在, 输出 my_na 看看.
+  CorrectAnswer: my_na
+  AnswerTests: omnitest(correctExpr='my_na')
+  Hint: 键入 my_na 以查看其内容.
+
+- Class: text
+  Output: 看到一个 TRUE, 你就知道 my_data 对应的元素是 NA. 同样, 只要你看到一个 FALSE, 你就会知道 my_data 的相应元素是我们从标准正态分布中随机抽取的.
+
+- Class: cmd_question
+  Output: 在前面关于逻辑运算符的讨论中, 我们说了 `==` 运算符可以判断两个对象是否相等. 所以, 你可能认为表达式 my_data == NA 产生的结果与 is.na() 相同. 试试看.
+  CorrectAnswer: my_data == NA
+  AnswerTests: omnitest(correctExpr='my_data == NA')
+  Hint: 尝试 my_data == NA 看看会发生什么.
+
+- Class: text
+  Output: 你得到了一个全是 NA 的向量的原因是 NA 实际上不是一个值, 而是一个 "不可用数量" (not available) 的占位符. 因此, 逻辑表达式是不完整的, R 别无选择, 只能返回与 my_data 长度相同的全都是 NA 的向量.
+
+- Class: text
+  Output: 别担心会不会有点混乱. 关键是, 在可能出现 NA 的任何时候使用逻辑表达式时都要小心, 因为一个 NA 值可能会破坏整个过程.
+
+- Class: text
+  Output: 所以, 回到手头的任务. 现在我们有一个向量, my_na, 它对每个 NA 都有一个 TRUE, 对每个数值都有一个 FALSE, 我们可以计算数据中的 NA 总数.
+
+- Class: text
+  Output: 这里有一个技巧, R 可以将 TRUE 表示 1, FALSE 表示 0. 因此, 如果我们把一堆 TRUE 和 FALSE 相加, 就得到了 TRUE 的总数.
+
+- Class: cmd_question
+  Output: 让我们试试看. 对 my_na 使用 sum() 函数来计算 my_na 中的 TRUE 总数, 从而计算 my_na 数据中的 NA 总数. 不要将结果赋给新变量.
+  CorrectAnswer: sum(my_na)
+  AnswerTests: omnitest(correctExpr='sum(my_na)')
+  Hint: 使用 sum(my_na) 来计算数据中的 NA 数.
+
+- Class: cmd_question
+  Output: 很酷吧? 最后, 让我们看一看数据, 让自己相信所有的东西都被 "加起来" 了. 将 my_data 打印到控制台.
+  CorrectAnswer: my_data
+  AnswerTests: omnitest(correctExpr='my_data')
+  Hint: 将 my_data 打印到控制台.
+
+- Class: cmd_question
+  Output: 现在我们已经了解了 NA, 让我们看看第二种类型的缺失值——NaN, 它表示 "not a number". 若要生成 NaN, 请尝试将0除以0 (使用正斜杠 "/").
+  CorrectAnswer: 0/0
+  AnswerTests: omnitest(correctExpr='0/0')
+  Hint: 尝试 0/0.
+
+- Class: cmd_question
+  Output: 我们再来一个, 只是为了好玩. 在 R 中, Inf 代表无穷大. 如果从 Inf 中减去 Inf 会怎么样?
+  CorrectAnswer: Inf - Inf
+  AnswerTests: omnitest(correctExpr='Inf - Inf')
+  Hint: 输入 Inf - Inf. 你能猜出结果吗?
+
+
